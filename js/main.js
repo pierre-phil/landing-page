@@ -53,23 +53,21 @@ function setBgGreet() {
   let hour = dateNow.format(hourFormat);
   if (hour < 12) {
     //Matin
-    document.body.style.backgroundImage = 'url("../img/matin.jpg")';
-    document.body.style.backgroundPosition = "center center";
-    document.body.style.backgroundSize = "cover";
-    document.body.style.color = "white";
+    refreshBg(bgMorning)
+    setInterval('refreshBg(bgMorning)', 5000)
+    document.body.style.color = 'white'
     greeting.textContent = "Bonne journée";
   } else if (hour < 18) {
     //Apres-midi
-    document.body.style.backgroundImage = 'url("../img/midi.jpg")';
-    document.body.style.backgroundPosition = "center center";
-    document.body.style.backgroundSize = "cover";
+    refreshBg(bgAfternoon)
+    setInterval('refreshBg(bgAfternoon)', 5000)
+    document.body.style.color = 'white'
     greeting.textContent = "Bonne après-midi";
   } else {
     //Soir
-    document.body.style.backgroundImage = 'url("../img/soir.jpg")';
-    document.body.style.backgroundPosition = "center center";
-    document.body.style.backgroundSize = "cover";
-    document.body.style.color = "white";
+    refreshBg(bgAfternoon)
+    setInterval('refreshBg(bgAfternoon)', 5000)
+    document.body.style.color = 'white'
     greeting.textContent = "Bonne soirée";
   }
 }
@@ -156,3 +154,15 @@ setBgGreet();
 getName();
 getFocus();
 addRandomQuote();
+
+// CODE DE PIERRE
+// resfresh de l'arrière-plan
+
+function refreshBg(object) {
+  const random = Math.floor(Math.random() *6) 
+  const randomBg = object[random]
+  console.log('randomBg', randomBg)
+  const imageBg = `${randomBg.link}`
+  document.body.style.backgroundImage = imageBg
+  document.body.style.backgroundSize = "cover"
+  }
