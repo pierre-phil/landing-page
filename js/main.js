@@ -7,16 +7,13 @@ const time = document.getElementById("time"),
   quote = document.getElementById("quote"),
   author = document.getElementById("author");
 
-//Options
-const showAmPm = true;
-
 //Show Time
 function showTime() {
   //utiliser Moment pour format francais
   const dateNow = moment(),
     dateHourFormat = "dddd Do MMMM, hh:mm:ss";
   dateNow.locale("fr");
-  //Output Time
+  //afficher l'heure
   time.innerHTML = dateNow.format(dateHourFormat);
 
   //variante avec new Date()
@@ -24,20 +21,23 @@ function showTime() {
     hour = now.getHours(),
     min = now.getMinutes(),
     sec = now.getSeconds();
+    
+  //Options
+  const showAmPm = true;
 
-    //Set AM or PM
+  //Afficher AM ou PM
   const amPm = hour >= 12 ? "PM" : "AM";
 
   //12hr Format
   hour = hour % 12 || 12;
 
-  //Output Time
+  //Afficher Heure
   time.innerHTML = `${addZero(hour)}<span>:</span>${addZero(
     min
   )}<span>:</span>${addZero(sec)} ${showAmPm ? amPm : ""}`;*/
 }
 /*
-//Add Zeros if no Moment
+//Ajouter Zeros
 function addZero(n) {
   return (n < 10 ? "0" : "") + n;
 }
@@ -53,21 +53,21 @@ function setBgGreet() {
   let hour = dateNow.format(hourFormat);
   if (hour < 12) {
     //Matin
-    refreshBg(bgMorning)
-    setInterval('refreshBg(bgMorning)', 5000)
-    document.body.style.color = 'white'
+    refreshBg(bgMorning);
+    setInterval("refreshBg(bgMorning)", 7000);
+    document.body.style.color = "white";
     greeting.textContent = "Bonne journée";
   } else if (hour < 18) {
     //Apres-midi
-    refreshBg(bgAfternoon)
-    setInterval('refreshBg(bgAfternoon)', 5000)
-    document.body.style.color = 'white'
+    refreshBg(bgAfternoon);
+    setInterval("refreshBg(bgAfternoon)", 7000);
+    document.body.style.color = "white";
     greeting.textContent = "Bonne après-midi";
   } else {
     //Soir
-    refreshBg(bgAfternoon)
-    setInterval('refreshBg(bgAfternoon)', 5000)
-    document.body.style.color = 'white'
+    refreshBg(bgAfternoon);
+    setInterval("refreshBg(bgAfternoon)", 7000);
+    document.body.style.color = "white";
     greeting.textContent = "Bonne soirée";
   }
 }
@@ -159,10 +159,59 @@ addRandomQuote();
 // resfresh de l'arrière-plan
 
 function refreshBg(object) {
-  const random = Math.floor(Math.random() *6) 
-  const randomBg = object[random]
-  console.log('randomBg', randomBg)
-  const imageBg = `${randomBg.link}`
-  document.body.style.backgroundImage = imageBg
-  document.body.style.backgroundSize = "cover"
+  const random = Math.floor(Math.random() * 6);
+  const randomBg = object[random];
+  console.log("randomBg", randomBg);
+  const imageBg = `${randomBg.link}`;
+  document.body.style.backgroundImage = imageBg;
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundRepeat = "no-repeat";
+}
+
+//script TO DO
+const enterButton = document.getElementById("enter");
+const input = document.getElementById("userInput");
+const ul = document.querySelector("ul");
+const item = document.getElementsByTagName("li");
+
+function inputLength() {
+  return input.value.length;
+}
+
+function createListElement() {
+  const li = document.createElement("li");
+  li.appendChild(document.createTextNode(input.value));
+  ul.appendChild(li);
+  input.value = "";
+
+  function crossOut() {
+    li.classList.toggle("done");
   }
+
+  li.addEventListener("click", crossOut);
+
+  const dBtn = document.createElement("button");
+  dBtn.appendChild(document.createTextNode("X"));
+  li.appendChild(dBtn);
+  dBtn.addEventListener("click", deleteListItem);
+
+  function deleteListItem() {
+    li.classList.add("delete");
+  }
+}
+
+function addListAfterClick() {
+  if (inputLength() > 0) {
+    createListElement();
+  }
+}
+
+function addListAfterKeypress(event) {
+  if (inputLength() > 0 && event.which === 13) {
+    createListElement();
+  }
+}
+
+enterButton.addEventListener("click", addListAfterClick);
+
+input.addEventListener("keypress", addListAfterKeypress);

@@ -8,16 +8,22 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="/css/style.css" />
     <title>Page d'accueil</title>
   </head>
   <body>
     <div id="container">
-      <aside id="citation">
+      <aside id="citation" class="mb-3">
         <blockquote id="quote"></blockquote>
         <cite id="author"></cite>
       </aside>
-      <main id="main">
+      <main id="main" class="mb-3">
         <time id="time"></time>
         <h1>
           <span id="greeting"></span>
@@ -28,26 +34,65 @@
           Apprendre de nouvelles notions web
         </h2>
       </main>
-      <aside id="to do">
-        <p>A faire</p>
-        <ul>
-          <li>Lorem ipsum r adipisicing</li>
-          <li>dolor sit amet consectetu</li>
-          <li>elit. Nostrum</li>
-        </ul>
+      <aside id="chrono" class="mb-3">
+        <form name="chronoForm">
+          <input
+            type="text"
+            name="chronotime"
+            id="chronotime"
+            value="0:00:00:00"
+          />
+          <!--Affichage string chrono-->
+          <input
+            type="button"
+            name="startstop"
+            value="start"
+            onClick="chronoStart()"
+          />
+          <!-- container bouton start/stop chrono-->
+          <input
+            type="button"
+            name="reset"
+            value="reset"
+            onClick="chronoReset()"
+          />
+          <!-- container bouton reset chrono-->
+        </form>
       </aside>
     </div>
-    <footer id="fil-actu">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum non
-      corrupti totam laudantium id, consequuntur ipsa doloremque possimus et.
-      Commodi, unde! Reiciendis, neque distinctio id autem consequuntur
-      consequatur at! Tempora.
-    </footer>
+    <div id="to-do" class="container">
+      <!-- <div class="row">
+        <div class="intro col-12">
+                  <div>
+            <div class="border1"></div>
+          
+        </div>
+      </div></div>-->
+      <div class="row">
+        <div class="col-12">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Nouvelle tâche.."
+            maxlength="27"
+          />
+          <button id="enter" class="btn btn-warning">
+            ADD
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="listItems col-12">
+          <ul class="col-12 offset-0 col-sm-8 offset-sm-2"></ul>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script src="/js/backgrounds.js"></script>
     <script src="/js/quotes.js"></script>
+    <script src="/js/chrono.js"></script>
     <script src="/js/main.js"></script>
   </body>
 </html>
